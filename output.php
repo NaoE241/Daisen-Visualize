@@ -1,13 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>大仙公園 見える化</title>
+ </head>
+ <body>
+ <table border="1" id="wrap">
+        <tr>
+          <th>sensor_id</th>
+          <th>point</th>
+          <th>timestamp</th>
+          <th>count1</th>
+          <th>count2</th>
+        </tr>
+
 <?php
+//Add data to table
 
 //Access to DB
-$dsn = 'mysql:host=[host];dbname=[dbname];charset=utf8mb4';
+$dsn = 'mysql:host=[hostname];dbname=[dbname];charset=utf8mb4';   
 $db_user = '[usrname]';
 $db_pass = '[password]';
 
 try {
    $db = new PDO($dsn, $db_user, $db_pass);
-   echo "Success";
+   echo "Success\n";
  } catch (PDOException $e) {
    echo 'Error: ' . $e->getMessage();
  }
@@ -17,18 +34,18 @@ $result_data = $db -> query('SELECT * FROM jsontable');
 
 //Access to each data
 foreach($result_data as $data){
-    //Get each data
-    $sensor_id = "sensor_id　".$data['sensor_id']."\n"."<br>".PHP_EOL;
-    $point     = "point　　".$data['point']."\n"."<br>".PHP_EOL;
-    $timestamp = "timestamp　　　".$data['timestamp']."\n"."<br>".PHP_EOL;
-    $count1    = "count1　　".$data['count1']."\n"."<br>".PHP_EOL;
-    $count2    = "count2　　".$data['count2']."\n"."<br>".PHP_EOL;
-   $real_array= array(
-      $sensor_id,$point,$timestamp,$count1,$count2,
-   );
-
-   //Output
-   echo implode('',$real_array);
+    //Add tag
+    $row = "<tr><td>".$data['sensor_id'].
+           "</td><td>".$data['point'].
+           "</td><td>".$data['timestamp'].
+           "</td><td>".$data['count1'].
+           "</td><td>".$data['count2']."</td></tr>";
+    //Output
+    echo($row);
 }
-
 ?>
+
+</table>
+
+ </body>
+</html>
