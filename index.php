@@ -1,3 +1,11 @@
+<?php
+ header('Expires: Tue, 1 Jan 2019 00:00:00 GMT');
+ header('Last-Modified:' . gmdate( 'D, d M Y H:i:s' ) . 'GMT');
+ header('Cache-Control:no-cache,no-store,must-revalidate,max-age=0');
+ header('Cache-Control:pre-check=0,post-check=0',false);
+ header('Pragma:no-cache');
+?>
+
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -5,17 +13,8 @@
     <title>大仙公園 見える化</title>
  </head>
  <body>
- <table border="1" id="wrap">
-        <tr>
-          <th>sensor_id</th>
-          <th>point</th>
-          <th>timestamp</th>
-          <th>count1</th>
-          <th>count2</th>
-        </tr>
 
 <?php
-//Add data to table
 
 //Access to DB
 $dsn = 'mysql:host=[hostname];dbname=[dbname];charset=utf8mb4';   
@@ -24,9 +23,9 @@ $db_pass = '[password]';
 
 try {
    $db = new PDO($dsn, $db_user, $db_pass);
-   echo "Success\n";
+   echo "接続OK！";
  } catch (PDOException $e) {
-   echo 'Error: ' . $e->getMessage();
+   echo 'DB接続エラー！: ' . $e->getMessage();
  }
 
 //Get all data 
@@ -34,18 +33,17 @@ $result_data = $db -> query('SELECT * FROM jsontable');
 
 //Access to each data
 foreach($result_data as $data){
-    //Add tag
-    $row = "<tr><td>".$data['sensor_id'].
-           "</td><td>".$data['point'].
-           "</td><td>".$data['timestamp'].
-           "</td><td>".$data['count1'].
-           "</td><td>".$data['count2']."</td></tr>";
+    //Get each data
+    $row = "sensor_id: ".$data['sensor_id']."<br>".
+           "point: ".$data['point']."<br>".
+           "timestamp: ".$data['timestamp']."<br>".
+           "count1: ".$data['count1']."<br>".
+           "count2: ".$data['count2']."<br>";
     //Output
+    //$("#wrap").append($row);
     echo($row);
 }
 ?>
-
-</table>
 
  </body>
 </html>
