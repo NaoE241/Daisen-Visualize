@@ -1,4 +1,5 @@
 <?php
+ //Delete cashe
  header('Expires: Tue, 1 Jan 2019 00:00:00 GMT');
  header('Last-Modified:' . gmdate( 'D, d M Y H:i:s' ) . 'GMT');
  header('Cache-Control:no-cache,no-store,must-revalidate,max-age=0');
@@ -13,6 +14,14 @@
     <title>大仙公園 見える化</title>
  </head>
  <body>
+      <table border="1">
+        <tr>
+          <th>sensor_id</th>
+          <th>point</th>
+          <th>timestamp</th>
+          <th>count1</th>
+          <th>count2</th>
+        </tr>
 
 <?php
 
@@ -34,16 +43,17 @@ $result_data = $db -> query('SELECT * FROM jsontable');
 //Access to each data
 foreach($result_data as $data){
     //Get each data
-    $row = "sensor_id: ".$data['sensor_id']."<br>".
-           "point: ".$data['point']."<br>".
-           "timestamp: ".$data['timestamp']."<br>".
-           "count1: ".$data['count1']."<br>".
-           "count2: ".$data['count2']."<br>";
+    $row = "<tr><td>".$data['sensor_id'].
+           "</td><td>".$data['point'].
+           "</td><td>".$data['timestamp'].
+           "</td><td>".$data['count1'].
+           "</td><td>".$data['count2']."</td></tr>";
     //Output
     //$("#wrap").append($row);
     echo($row);
 }
 ?>
 
+  </table>
  </body>
 </html>
