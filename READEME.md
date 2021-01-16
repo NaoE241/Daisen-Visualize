@@ -5,7 +5,7 @@
 | File | Function |
 |------|-------|
 |receive.php | pushされたJSON形式データの読み込みと,そのデータをDBにinsertする. |
-|output.php | DBからすべてのデータを連想配列で受け取り,Web上に出力する. |
+|index.php | DBからすべてのデータを連想配列で受け取り,Web上に出力する. |
 
 ## DBの仕様
 DBは以下の形式のTableをもつ.
