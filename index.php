@@ -1,5 +1,4 @@
 <?php
- //Delete cashe
  header('Expires: Tue, 1 Jan 2019 00:00:00 GMT');
  header('Last-Modified:' . gmdate( 'D, d M Y H:i:s' ) . 'GMT');
  header('Cache-Control:no-cache,no-store,must-revalidate,max-age=0');
@@ -40,8 +39,20 @@ try {
 //Get all data 
 $result_data = $db -> query('SELECT * FROM jsontable');
 
+//Get now date
+$today = date("Y-m-d");
+$time1 = new DateTime($today);
+
 //Access to each data
 foreach($result_data as $data){
+  
+  //Compare date
+  $day = substr($data['timestamp'],0,10);
+  $time2 = new DateTime($day);
+  $diff = $time1->diff($time2);
+
+  //If in a week
+  if($diff->days <= 7){
     //Get each data
     $row = "<tr><td>".$data['sensor_id'].
            "</td><td>".$data['point'].
@@ -51,9 +62,12 @@ foreach($result_data as $data){
     //Output
     //$("#wrap").append($row);
     echo($row);
+  }
 }
+
 ?>
 
   </table>
+
  </body>
 </html>
