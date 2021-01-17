@@ -1,4 +1,5 @@
 <?php
+//Delete cashe on Browser
  header('Expires: Tue, 1 Jan 2019 00:00:00 GMT');
  header('Last-Modified:' . gmdate( 'D, d M Y H:i:s' ) . 'GMT');
  header('Cache-Control:no-cache,no-store,must-revalidate,max-age=0');
@@ -59,8 +60,8 @@ foreach($result_data as $data){
            "</td><td>".$data['timestamp'].
            "</td><td>".$data['count1'].
            "</td><td>".$data['count2']."</td></tr>";
+           
     //Output
-    //$("#wrap").append($row);
     echo($row);
   }
 }
