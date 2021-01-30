@@ -14,5 +14,5 @@ DBは以下の形式のTableをもつ.
 |sensor_id|varchar(10)|YES| |NULL| |
 |point|varchar(10)|YES| |NULL| |
 |timestamp|varchar(30)|YES| |NULL| |
-|count1|varchar(10)|YES| |NULL| |
-|count2|varchar(10)|YES| |NULL| |
+|count1|int|YES| |NULL| |
+|count2|int|YES| |NULL| |
